@@ -32,3 +32,12 @@ app = Flask(__name__)
 #################################################
 # Flask Routes
 #################################################
+
+@app.route("/")
+def welcome():
+    """List all available api routes."""
+    return (
+        f"Available Routes:<br/>"
+        f"/api/v1.0/names<br/>"
+        f"/api/v1.0/passengers"
+    )
