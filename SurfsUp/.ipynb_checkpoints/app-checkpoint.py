@@ -56,7 +56,6 @@ def prcp():
                                                               .filter(Measurement.date<='2017-08-23') \
                                                               .all()
     
-
     #create dictionary of preciptation data
     prcp_dict={date:prcp for date, prcp in prcp_query}
     
@@ -64,6 +63,22 @@ def prcp():
     session.close()
 
     return jsonify(prcp_dict)
+
+@app.route("/api/v1.0/stations")
+def stations():
+    # Create our session (link) from Python to the DB
+    session = Session(engine) 
+    
+    # create list of the stations
+    station = session.query(Station.station).all()
+    
+    stations_list = list(np.ravel(station))
+
+    # close your session
+    session.close()
+    
+    return jsonify(stations_list)
+
 
 
 if __name__ == '__main__':
